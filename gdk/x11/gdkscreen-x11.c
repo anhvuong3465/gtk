@@ -826,7 +826,7 @@ init_no_multihead (GdkScreen *screen, gboolean *changed)
                         gdk_screen_get_height (screen));
   g_object_notify (G_OBJECT (monitor), "workarea");
   gdk_monitor_set_physical_size (GDK_MONITOR (monitor),
-                                 gdk_screen_get_height_mm (screen),
+                                 gdk_screen_get_width_mm (screen),
                                  gdk_screen_get_height_mm (screen));
   gdk_monitor_set_scale_factor (GDK_MONITOR (monitor), x11_screen->window_scale);
 
