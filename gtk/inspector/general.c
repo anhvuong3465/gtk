@@ -340,7 +340,6 @@ translate_subpixel_layout (GdkSubpixelLayout subpixel)
 static void
 populate_display (GdkScreen *screen, GtkInspectorGeneral *gen)
 {
-  gchar *name;
   gint i;
   GList *children, *l;
   GtkWidget *child;
@@ -362,9 +361,9 @@ populate_display (GdkScreen *screen, GtkInspectorGeneral *gen)
     }
   g_list_free (children);
 
-  name = gdk_screen_make_display_name (screen);
-  gtk_label_set_label (GTK_LABEL (gen->priv->display_name), name);
-  g_free (name);
+  display = gdk_screen_get_display (screen);
+
+  gtk_label_set_label (GTK_LABEL (gen->priv->display_name), gdk_display_get_name (display));
 
   if (gdk_screen_get_rgba_visual (screen) != NULL)
     gtk_widget_show (gen->priv->display_rgba);
@@ -372,7 +371,6 @@ populate_display (GdkScreen *screen, GtkInspectorGeneral *gen)
   if (gdk_screen_is_composited (screen))
     gtk_widget_show (gen->priv->display_composited);
 
-  display = gdk_screen_get_display (screen);
   n_monitors = gdk_display_get_n_monitors (display);
   for (i = 0; i < n_monitors; i++)
     {
